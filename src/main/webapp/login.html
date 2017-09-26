@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/SsoServer/auth/login" method="get">
+		<ul>
+			<li><span>账号</span> <input type="text" name="user" /></li>
+			<li><span>密码</span> <input type="password" name="pwd" /></li>
+			<li><input type="submit" value="提交" /></li>
+		</ul>
+		<input type="hidden" name="returnUrl" />
+	</form>
+	<script type="text/javascript">
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+
+document.getElementsByName("returnUrl").value = GetQueryString("returnUrl");
+</script>
+</body>
+</html>
