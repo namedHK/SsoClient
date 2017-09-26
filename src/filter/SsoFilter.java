@@ -50,7 +50,8 @@ public class SsoFilter implements Filter{
                 String token = request.getParameter(Commons.token);
                 if(StringUtil.isEmpty(token)){
                     //没有的话就登录
-                    ((HttpServletResponse)response).sendRedirect(ssoUrl+ssoLoginUrl+"?"+Commons.returnUrl+"="+returnUrl);
+                    String url = ssoUrl+ssoLoginUrl+"?"+Commons.returnUrl+"="+returnUrl;
+                    ((HttpServletResponse)response).sendRedirect(url);
                 }else{
                     HttpClient httpClient = new HttpClient();
                     PostMethod method = new PostMethod(ssoUrl);
@@ -75,7 +76,7 @@ public class SsoFilter implements Filter{
     public void init(FilterConfig arg0) throws ServletException {
         ssoLoginUrl = "/login";
         ssoCheckUrl = "/verify";
-        ssoUrl = "127.0.0.1:8080/SsoServer";
+        ssoUrl = "127.0.0.1:8081/SsoServer";
     }
 
 }
