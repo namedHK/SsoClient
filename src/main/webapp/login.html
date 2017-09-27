@@ -5,13 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/SsoServer/auth/login" method="get">
-		<ul>
-			<li><span>账号</span> <input type="text" name="user" /></li>
-			<li><span>密码</span> <input type="password" name="pwd" /></li>
-			<li><input type="submit" value="提交" /></li>
-		</ul>
-		<input type="hidden" name="returnUrl" />
+	<form action="/SsoClient/loginOut" method="get">
+		欢迎登陆sso客户端：<span id="username"></span>
+		<input type="submit" value="登出" />
 	</form>
 	<script type="text/javascript">
 function GetQueryString(name)
@@ -21,7 +17,7 @@ function GetQueryString(name)
      if(r!=null)return  unescape(r[2]); return null;
 }
 
-document.getElementsByName("returnUrl").value = GetQueryString("returnUrl");
+document.getElementById("username").innerHTML = GetQueryString("username");
 </script>
 </body>
 </html>

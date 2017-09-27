@@ -27,7 +27,8 @@ public class Login extends HttpServlet {
 	    String username = "";
 	    if(tokenInfo != null)
 	        username = tokenInfo.getUserName();
-	        response.sendRedirect("/SsoApp/login.html");
+	        System.out.println("uri = "+request.getRemoteAddr());
+	        response.sendRedirect("/SsoClient/login.html?username="+username);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
