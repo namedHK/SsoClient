@@ -54,6 +54,7 @@ public class SsoFilter implements Filter{
                 if(StringUtil.isEmpty(token)){
                     //没有的话就登录
                     String url = ssoUrl+ssoLoginUrl+"?"+Commons.returnUrl+"="+returnUrl;
+                    //为什么要重定向，可能是因为要取得globalsessionId
                     response.sendRedirect(url);
                     return;
                 }else{

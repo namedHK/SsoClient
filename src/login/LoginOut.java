@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import session.LocalSessions;
 import util.HttpUtil;
+import util.StringUtil;
 import constant.Commons;
 
 /**
@@ -33,15 +34,26 @@ public class LoginOut extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    if(request.getParameter(Commons.isGobal) == null){
-	        HttpSession session = request.getSession();
+	        /*HttpSession session = request.getSession();
             session.setAttribute(Commons.tokenInfo, null);
-            session.invalidate();
             //如果是本应用登出的话就同时把登出请求发送给认证中心
             String url = Commons.ssoUrl+Commons.ssoExit;
             Map<String, String> params = new HashMap<>();
+            //通过
+            if(session.getAttribute(Commons.globalSessionId) != null){
+                String GlobalSessionId  = session.getAttribute(Commons.globalSessionId).toString();
+                params.put(Commons.globalSessionId, GlobalSessionId);
+            }
             params.put(Commons.loaclSessionId, session.getId());
             HttpUtil.http(url, params);
-            response.sendRedirect("/SsoClient/login");
+            //对session有操作的时候，不要调用invalidate
+            session.invalidate();
+            response.sendRedirect("/SsoClient/login");*/
+	        //http://127.0.0.1:8081/SsoClient/loginOut
+	        String returnUrl = request.getRequestURL().toString();
+	        returnUrl = StringUtil.getUrl(returnUrl)+"/login";
+	        response.sendRedirect(Commons.ssoUrl+Commons.ssoExit+"?"+Commons.returnUrl+"="+returnUrl);
+	        
         }else{
             //根据穿过来的loaclsessionId登出
             String localSessionId = request.getParameter(Commons.loaclSessionId);
